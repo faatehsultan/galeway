@@ -1,0 +1,93 @@
+[project]
+name = "galeway"
+version = "0.0.0"
+description = "Galeway API: weather-aware truck routing"
+requires-python = ">=3.13,<3.14"
+dependencies = [
+    "django==6.1.3",
+    "django-ninja==1.8.0",
+    "django-environ==0.14.0",
+    "django-cors-headers==4.9.0",
+    "pydantic==2.14.4",
+    "structlog==26.1.0",
+    "uvicorn==0.54.0",
+]
+
+[dependency-groups]
+dev = [
+    "ruff==0.17.6",
+    "mypy==2.4.1",
+    "django-stubs==6.1.2",
+    "pytest==9.2.0",
+    "pytest-django==4.14.0",
+    "pytest-asyncio==1.5.0",
+    "pytest-cov==7.1.0",
+    "import-linter==2.17",
+    "pip-audit==2.10.1",
+    "pre-commit==4.7.0",
+]
+
+[tool.uv]
+# An application, not a library: install dependencies only (see Dockerfile).
+package = false
+
+# ── ruff ──────────────────────────────────────────────────────────────
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+src = ["."]
+
+[tool.ruff.lint]
+select = [
+    "E", "F", "W", "I", "N", "UP", "B", "A", "C4", "SIM", "PTH", "RET",
+    "ARG", "ERA", "PL", "RUF", "S", "ASYNC", "DTZ", "T20",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"config/settings/*.py" = ["F403", "F405", "E402"]
+"config/settings/test.py" = ["S105"]
+"tests/**" = ["S101", "PLR2004"]
+
+# ── mypy ──────────────────────────────────────────────────────────────
+[tool.mypy]
+python_version = "3.13"
+strict = true
+plugins = ["mypy_django_plugin.main", "pydantic.mypy"]
+files = ["config", "galeway", "tests", "manage.py"]
+
+[[tool.mypy.overrides]]
+# django-environ ships no type information.
+module = ["environ", "environ.*"]
+ignore_missing_imports = true
+
+[tool.django-stubs]
+django_settings_module = "config.settings.test"
+
+# ── pytest + coverage ─────────────────────────────────────────────────
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings.test"
+pythonpath = ["."]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+addopts = "-ra --strict-markers --strict-config"
+
+[tool.coverage.run]
+source = ["galeway", "config"]
+branch = true
+
+[tool.coverage.report]
+# Backend gate (QUALITY_GATES): 85% overall. The 95% domain gate starts in Phase 1.
+fail_under = 85
+show_missing = true
+omit = ["config/settings/dev.py"]
+
+# ── import-linter ─────────────────────────────────────────────────────
+[tool.importlinter]
+root_package = "galeway"
+include_external_packages = true
+
+[[tool.importlinter.contracts]]
+name = "planning.domain is pure (no Django, no HTTP layer, no logging stack)"
+type = "forbidden"
+source_modules = ["galeway.planning.domain"]
+forbidden_modules = ["django", "ninja", "pydantic", "structlog", "galeway.api", "galeway.core"]

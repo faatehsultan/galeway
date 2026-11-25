@@ -1,0 +1,66 @@
+# ── Secrets (never commit) ────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# ── OS / editors ──────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.swp
+
+# ── Claude Code / agent tooling (keep the shared hook config) ─────────
+.claude/*
+!.claude/settings.json
+.remember/
+
+# ── Python / backend ──────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.python-version
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.hypothesis/
+.import_linter_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+junit*.xml
+*.egg-info/
+build/
+# backend/ only: OpenAPI export is a build artifact, schema.d.ts is the committed contract
+backend/openapi.json
+
+# ── Node / frontend ───────────────────────────────────────────────────
+node_modules/
+frontend/dist/
+frontend/coverage/
+frontend/.vite/
+frontend/test-results/
+frontend/playwright-report/
+frontend/playwright/.cache/
+*.tsbuildinfo
+.eslintcache
+.size-limit.cache
+npm-debug.log*
+pnpm-debug.log*
+.pnpm-store/
+
+# ── Logs, temp, local state ───────────────────────────────────────────
+*.log
+tmp/
+.tmp/
+.cache/
+.lighthouseci/
+
+# ── Docker ────────────────────────────────────────────────────────────
+docker-compose.override.yml
