@@ -1,0 +1,85 @@
+/*
+ * Design tokens. Source of truth: docs/06-design/DESIGN.md §3-5.
+ * Do not add colors, radii or shadows here without updating that doc.
+ * Light is the default; theme-init.js sets data-theme before first paint.
+ */
+
+:root,
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f6f7f9;
+  --panel: #ffffff;
+  --sub: #f1f3f6;
+  --border: #e3e7ed;
+  --text: #0f172a;
+  --muted: #5b6576;
+  --accent: #2563eb;
+  --accentSoft: #eaf1ff;
+  --accentText: #1d4ed8;
+  --onAccent: #ffffff;
+  --map: #e9eef3;
+  --alt: #94a3b8;
+  --label: #1e293b;
+  --glass: rgb(255 255 255 / 0.92);
+  --skel: #e6eaf0;
+  --okFg: #047857;
+  --errFg: #b91c1c;
+  --errBg: #fef2f2;
+  --errBorder: #fecaca;
+  --elevation: 0 1px 2px rgb(15 23 42 / 0.06), 0 8px 24px rgb(15 23 42 / 0.08);
+
+  --riskLowBg: #d1fae5;
+  --riskLowFg: #065f46;
+  --riskModerateBg: #fef3c7;
+  --riskModerateFg: #92400e;
+  --riskHighBg: #ffedd5;
+  --riskHighFg: #9a3412;
+  --riskSevereBg: #fee2e2;
+  --riskSevereFg: #991b1b;
+  --riskNoTravelBg: #fae8ff;
+  --riskNoTravelFg: #86198f;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0b0f17;
+  --panel: #111723;
+  --sub: #0e131d;
+  --border: #222c3b;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --accent: #3b82f6;
+  --accentSoft: #172554;
+  --accentText: #93c5fd;
+  --onAccent: #ffffff;
+  --map: #0d1420;
+  --alt: #4b5563;
+  --label: #e2e8f0;
+  --glass: rgb(17 23 35 / 0.92);
+  --skel: #1a2230;
+  --okFg: #6ee7b7;
+  --errFg: #fca5a5;
+  --errBg: #2a1215;
+  --errBorder: #5b1d24;
+  --elevation: 0 8px 24px rgb(0 0 0 / 0.45);
+
+  --riskLowBg: #064e3b;
+  --riskLowFg: #6ee7b7;
+  --riskModerateBg: #422006;
+  --riskModerateFg: #fde68a;
+  --riskHighBg: #431407;
+  --riskHighFg: #fdba74;
+  --riskSevereBg: #450a0a;
+  --riskSevereFg: #fca5a5;
+  --riskNoTravelBg: #3b0764;
+  --riskNoTravelFg: #f0abfc;
+}
+
+/* Risk bar and map colors are identical in both themes. */
+:root {
+  --riskLow: #10b981;
+  --riskModerate: #eab308;
+  --riskHigh: #f97316;
+  --riskSevere: #dc2626;
+  --riskNoTravel: #a21caf;
+}

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Galeway: weather-aware truck routing</title>
+    <meta
+      name="description"
+      content="Plan the safest truck route through the weather. Three routes, forecast risk at every checkpoint for your ETA and load, and one clear recommendation."
+    />
+    <link rel="canonical" href="%VITE_SITE_URL%/" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Galeway" />
+    <meta property="og:title" content="Galeway: pick the safest way through the weather" />
+    <meta
+      property="og:description"
+      content="Three truck routes, forecast risk at every checkpoint, one clear recommendation."
+    />
+    <meta property="og:url" content="%VITE_SITE_URL%/" />
+    <meta property="og:image" content="%VITE_SITE_URL%/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Galeway map showing three truck routes with weather risk along each"
+    />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- X / Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Galeway: weather-aware truck routing" />
+    <meta
+      name="twitter:description"
+      content="Three truck routes, forecast risk at every checkpoint, one clear recommendation."
+    />
+    <meta name="twitter:image" content="%VITE_SITE_URL%/og-image.png" />
+
+    <!-- Icons and PWA metadata -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#F6F7F9" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0B0F17" media="(prefers-color-scheme: dark)" />
+
+    <!-- Performance hints -->
+    <link rel="preconnect" href="%VITE_API_BASE_URL%" crossorigin />
+
+    <!-- Structured data (not executed, so CSP does not apply) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Galeway",
+        "url": "%VITE_SITE_URL%/",
+        "description": "Weather-aware truck routing that recommends the safest route based on forecast risk, load weight and travel time.",
+        "applicationCategory": "TravelApplication",
+        "operatingSystem": "Any (web browser)",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "image": "%VITE_SITE_URL%/og-image.png"
+      }
+    </script>
+
+    <!-- Theme before first paint (no flash). Keep in sync with src/app/theme.ts.
+         Its sha256 is added to the CSP by build/pagesHeaders.ts. -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("galeway.theme");
+          var dark =
+            stored === "dark" ||
+            (stored !== "light" && matchMedia("(prefers-color-scheme: dark)").matches);
+          document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <noscript>Galeway needs JavaScript to plan routes.</noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

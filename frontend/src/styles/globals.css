@@ -1,0 +1,110 @@
+@import "tailwindcss";
+@import "@fontsource/inter/latin-400.css";
+@import "@fontsource/inter/latin-500.css";
+@import "@fontsource/space-grotesk/latin-600.css";
+@import "@fontsource/space-grotesk/latin-700.css";
+@import "@fontsource/jetbrains-mono/latin-400.css";
+@import "@fontsource/jetbrains-mono/latin-500.css";
+@import "./tokens.css";
+
+/* Expose the tokens to Tailwind: bg-bg, text-muted, border-border, bg-accent-soft, … */
+@theme inline {
+  --color-*: initial;
+  --color-bg: var(--bg);
+  --color-panel: var(--panel);
+  --color-sub: var(--sub);
+  --color-border: var(--border);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accentSoft);
+  --color-accent-text: var(--accentText);
+  --color-on-accent: var(--onAccent);
+  --color-map: var(--map);
+  --color-alt: var(--alt);
+  --color-label: var(--label);
+  --color-glass: var(--glass);
+  --color-skel: var(--skel);
+  --color-ok-fg: var(--okFg);
+  --color-err-fg: var(--errFg);
+  --color-err-bg: var(--errBg);
+  --color-err-border: var(--errBorder);
+
+  --color-risk-low: var(--riskLow);
+  --color-risk-moderate: var(--riskModerate);
+  --color-risk-high: var(--riskHigh);
+  --color-risk-severe: var(--riskSevere);
+  --color-risk-no-travel: var(--riskNoTravel);
+  --color-risk-low-bg: var(--riskLowBg);
+  --color-risk-low-fg: var(--riskLowFg);
+  --color-risk-moderate-bg: var(--riskModerateBg);
+  --color-risk-moderate-fg: var(--riskModerateFg);
+  --color-risk-high-bg: var(--riskHighBg);
+  --color-risk-high-fg: var(--riskHighFg);
+  --color-risk-severe-bg: var(--riskSevereBg);
+  --color-risk-severe-fg: var(--riskSevereFg);
+  --color-risk-no-travel-bg: var(--riskNoTravelBg);
+  --color-risk-no-travel-fg: var(--riskNoTravelFg);
+
+  --shadow-float: var(--elevation);
+}
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  /* DESIGN §4: size / line height */
+  --text-h1: 28px;
+  --text-h1--line-height: 34px;
+  --text-hero: 26px;
+  --text-hero--line-height: 31px;
+  --text-h2: 16px;
+  --text-h2--line-height: 22px;
+  --text-body: 14px;
+  --text-body--line-height: 21px;
+  --text-small: 12px;
+  --text-small--line-height: 16px;
+
+  /* DESIGN §5: 6 chips · 8 small buttons · 10 inputs/buttons · 12 cards · 14 map bars · 16 dialogs */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 12px;
+  --radius-2xl: 14px;
+  --radius-3xl: 16px;
+
+  --ease-panel: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@layer base {
+  html {
+    background: var(--bg);
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
