@@ -1,0 +1,20 @@
+{
+  // Run from the repo root by `make docs-check`. Links and anchors are checked separately
+  // by .github/scripts/check_docs_links.py.
+  "globs": ["**/*.md"],
+  "ignores": ["**/node_modules/**", "**/.venv/**", ".remember/**", ".claude/**", "**/dist/**"],
+  "config": {
+    "default": true,
+    // Tables and prose lines are deliberately long.
+    "MD013": false,
+    // README uses a little inline HTML (centered logo, badges); front matter is not used.
+    "MD033": false,
+    "MD041": false,
+    // The same heading text legitimately repeats under different parents (e.g. "Added").
+    "MD024": { "siblings_only": true },
+    // Bold lead-ins such as **Key properties** are deliberate labels, not headings.
+    "MD036": false,
+    // Hand-written tables use compact `|---|` separators; spacing style is noise.
+    "MD060": false
+  }
+}

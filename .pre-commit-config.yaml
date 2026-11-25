@@ -1,0 +1,53 @@
+# Installed by `make setup`. Same checks CI runs, on staged files only.
+# See docs/07-engineering/QUALITY_GATES.md §2.
+default_install_hook_types: [pre-commit, commit-msg]
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c # v6.0.0
+    hooks:
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: [--maxkb=1024]
+
+  - repo: https://github.com/compilerla/conventional-pre-commit
+    rev: 33b50eb042bee26eac0ee96ad84aa9c1b4dccdd8 # v4.5.0
+    hooks:
+      - id: conventional-pre-commit
+        stages: [commit-msg]
+        args: [feat, fix, refactor, test, docs, chore, perf, build, ci]
+
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: 83d9cd684c87d95d656c1458ef04895a7f1cbd8e # v8.30.1
+    hooks:
+      - id: gitleaks
+
+  - repo: local
+    hooks:
+      - id: ruff-check
+        name: ruff check --fix
+        entry: uv run --project backend ruff check --fix
+        language: system
+        types: [python]
+        files: ^backend/
+      - id: ruff-format
+        name: ruff format
+        entry: uv run --project backend ruff format
+        language: system
+        types: [python]
+        files: ^backend/
+      - id: prettier
+        name: prettier --write
+        entry: .github/scripts/run_in_frontend.sh prettier --write --ignore-unknown --
+        language: system
+        files: ^frontend/
+        exclude: ^frontend/(public|pnpm-lock\.yaml|src/routeTree\.gen\.ts|src/lib/api/schema\.d\.ts)
+      - id: eslint
+        name: eslint --fix
+        entry: .github/scripts/run_in_frontend.sh eslint --fix --
+        language: system
+        files: ^frontend/.*\.(ts|tsx|js)$
+        exclude: ^frontend/(src/routeTree\.gen\.ts|src/lib/api/schema\.d\.ts)
